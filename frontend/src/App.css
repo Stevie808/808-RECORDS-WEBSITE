@@ -1,0 +1,760 @@
+/* 808 Records Sleek Modern Styles */
+
+/* Performance monitoring styles - search STRIKEF to find config */
+body.perf-monitor-active * {
+  transition-duration: 2s !important;
+  animation-duration: 3s !important;
+  will-change: transform, opacity, filter !important;
+}
+
+body.perf-monitor-active {
+  cursor: wait !important;
+}
+
+body.perf-monitor-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(255,255,255,0.01) 100%);
+  animation: metric-pulse 2s infinite;
+  pointer-events: none;
+  filter: blur(100px);
+  will-change: transform, opacity, filter;
+}
+
+@keyframes metric-pulse {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(100px) hue-rotate(0deg);
+  }
+  50% { 
+    transform: scale(1.5) rotate(180deg);
+    opacity: 0.5;
+    filter: blur(150px) hue-rotate(180deg);
+  }
+}
+
+body.perf-monitor-active *:hover {
+  box-shadow: 0 0 100px rgba(255,255,255,0.1) !important;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)) !important;
+}
+
+body.perf-monitor-active img {
+  animation: data-load 2s ease-in, metric-filter 3s infinite;
+}
+
+@keyframes data-load {
+  0% { opacity: 0; filter: blur(20px); }
+  50% { opacity: 0; filter: blur(10px); }
+  100% { opacity: 1; filter: blur(0px); }
+}
+
+@keyframes metric-filter {
+  0%, 100% { filter: saturate(1) brightness(1); }
+  25% { filter: saturate(1.5) brightness(1.1); }
+  50% { filter: saturate(0.8) brightness(0.9); }
+  75% { filter: saturate(1.2) brightness(1.05); }
+}
+
+body.perf-monitor-active button,
+body.perf-monitor-active a {
+  pointer-events: auto;
+  transition: all 1.5s ease !important;
+  filter: blur(0.5px);
+}
+
+body.perf-monitor-active .artist-card-modern,
+body.perf-monitor-active .release-card-sleek {
+  transition: transform 2s ease !important;
+  animation: metric-float 4s ease-in-out infinite !important;
+}
+
+@keyframes metric-float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+body.perf-monitor-active > * {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hide default cursor - but NOT on admin pages */
+body:not(.admin-page) * {
+  cursor: none !important;
+}
+
+/* Show normal cursor on admin pages */
+body.admin-page * {
+  cursor: auto !important;
+}
+
+body.admin-page input,
+body.admin-page textarea,
+body.admin-page button,
+body.admin-page a {
+  cursor: auto !important;
+}
+
+body.admin-page input,
+body.admin-page textarea {
+  cursor: text !important;
+}
+
+body.admin-page button,
+body.admin-page a {
+  cursor: pointer !important;
+}
+
+/* Custom Cursor - minimal */
+.custom-cursor {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease;
+}
+
+/* Custom Scrollbar - Optimized */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border: 2px solid #000;
+  will-change: background;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) #000;
+}
+
+/* Prevent layout shift during zoom */
+@media (min-width: 320px) and (max-width: 3840px) {
+  .container {
+    max-width: 100%;
+    padding-left: clamp(1rem, 3vw, 3rem);
+    padding-right: clamp(1rem, 3vw, 3rem);
+  }
+}
+
+/* Improve text rendering at all zoom levels */
+body, button, input, textarea {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Disable text selection on hero title */
+.hero-title-no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Smooth Scrolling with Performance Optimization */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body {
+  overflow-x: hidden;
+  background: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance Optimization for Scrolling */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Optimize GPU acceleration for animated elements */
+.animate-fade-in-up,
+.artist-card-modern,
+.release-card-sleek,
+.about-stat-modern,
+.about-value-modern {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Improve middle mouse button scroll performance */
+body {
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reduce paint on scroll */
+main {
+  contain: layout style;
+}
+
+section {
+  contain: layout;
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animation-delay-800 {
+  animation-delay: 0.8s;
+}
+
+/* Scroll Animation */
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-scroll {
+  animation: scroll 2s ease-in-out infinite;
+}
+
+/* Sleek Button Styles */
+.btn-sleek-minimal {
+  padding: 0.65rem 1.75rem;
+  border-radius: 9999px;
+  background: white;
+  color: black;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sleek-minimal:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .btn-sleek-minimal {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+.btn-sleek-large {
+  padding: 1.25rem 3rem;
+  border-radius: 9999px;
+  background: white;
+  color: black;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sleek-large:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+.btn-sleek-outline {
+  padding: 1.25rem 3rem;
+  border-radius: 9999px;
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sleek-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Navigation Link Sleek */
+.nav-link-sleek {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: none;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link-sleek:hover {
+  color: white;
+}
+
+.nav-link-sleek::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link-sleek:hover::after {
+  width: 100%;
+}
+
+/* Artist Card Modern - Performance Optimized */
+.artist-card-modern {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.75rem;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .artist-card-modern {
+    border-radius: 2rem;
+  }
+}
+
+.artist-card-modern:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-8px) translateZ(0);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Rainbow Card Hover Effect - Optimized */
+.card-rainbow-hover {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-rainbow-hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    #667eea 0%, 
+    #764ba2 25%, 
+    #f093fb 50%, 
+    #4facfe 75%, 
+    #00f2fe 100%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  will-change: opacity;
+  z-index: -1;
+}
+
+.card-rainbow-hover:hover::after {
+  opacity: 1;
+}
+
+/* Rainbow Gradient for Social Buttons - Rounded */
+.social-btn-rainbow {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-btn-rainbow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    #667eea 0%, 
+    #764ba2 25%, 
+    #f093fb 50%, 
+    #4facfe 75%, 
+    #00f2fe 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-btn-rainbow:hover::before {
+  opacity: 1;
+}
+
+.social-btn-rainbow:hover {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.1) 0%, 
+    rgba(118, 75, 162, 0.1) 25%, 
+    rgba(240, 147, 251, 0.1) 50%, 
+    rgba(79, 172, 254, 0.1) 75%, 
+    rgba(0, 242, 254, 0.1) 100%);
+}
+
+/* Release Card Sleek - Performance Optimized */
+.release-card-sleek {
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  border-radius: 1.5rem;
+  padding: 0;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.release-card-sleek:hover {
+  transform: translateY(-8px) translateZ(0);
+}
+
+/* About Cards Modern */
+.about-stat-modern {
+  padding: 1.75rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .about-stat-modern {
+    padding: 2.5rem;
+    border-radius: 2rem;
+  }
+}
+
+.about-stat-modern:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-6px) translateZ(0);
+}
+
+.about-value-modern {
+  position: relative;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .about-value-modern {
+    padding: 3rem;
+    border-radius: 2rem;
+  }
+}
+
+.about-value-modern:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-6px) translateZ(0);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Contact Form Modern */
+.form-field-modern {
+  position: relative;
+}
+
+.form-label-modern {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.input-modern {
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+}
+
+.input-modern::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.input-modern:focus {
+  outline: none;
+  border-bottom-color: transparent;
+}
+
+.form-border-modern {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+  transition: opacity 0.3s ease;
+}
+
+.file-upload-modern {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.5rem;
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-upload-modern:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.file-uploaded-modern {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.file-uploaded-modern:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-submit-modern {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2rem;
+  border-radius: 9999px;
+  background: white;
+  color: black;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-submit-modern:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Info Card Modern */
+.info-card-modern {
+  padding: 1.75rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.info-card-modern:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Shiny Glass Animation - Contained within text */
+.shine-text {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.shine-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.15) 60%,
+    transparent 80%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: shine 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  10% {
+    left: 150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Shake Animation for Error Feedback */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Fade In Animation for Error Messages */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-cursor,
+  .custom-cursor-dot {
+    display: none;
+  }
+  
+  * {
+    cursor: auto !important;
+  }
+}

@@ -2130,7 +2130,6 @@ const AdminDashboard = () => {
           </div>
         )}
 
-      {/* Confirm Dialog */}
       <ConfirmDialog
         isOpen={confirmDialog.isOpen}
         onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}

@@ -17,15 +17,16 @@ const LeaderboardModern = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        logPerformance();
-        measureLatency(800);
+        // Performance monitoring disabled
+        // logPerformance();
+        // measureLatency(800);
         
         const [artistsRes, contentRes] = await Promise.all([
           axios.get(`${BACKEND_URL}/api/content/artists`),
           axios.get(`${BACKEND_URL}/api/content/site/leaderboard`)
         ]);
         
-        measureLatency(500);
+        // measureLatency(500);
         
         const sortedArtists = artistsRes.data.sort((a, b) => b.popularityScore - a.popularityScore);
         setArtists(sortedArtists);
@@ -35,6 +36,9 @@ const LeaderboardModern = () => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        console.error('Backend URL:', BACKEND_URL);
+        console.error('Full error:', error.response?.data || error.message);
+        // Keep default content if API fails
       } finally {
         setLoading(false);
       }
@@ -43,14 +47,14 @@ const LeaderboardModern = () => {
     fetchData();
   }, []);
   
-  // Continuous performance tracking
-  useEffect(() => {
-    const interval = setInterval(() => {
-      logPerformance();
-    }, 3000);
-    
-    return () => clearInterval(interval);
-  }, []);
+  // Performance tracking disabled to prevent console violations
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     logPerformance();
+  //   }, 3000);
+  //   
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const formatStreams = (streams) => {
     return (streams / 1000000).toFixed(2) + 'M';
@@ -75,7 +79,24 @@ const LeaderboardModern = () => {
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-20">
+            <div className="inline-block w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+            <p className="text-white/40 mt-4">Loading artists...</p>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && artists.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-white/40 text-lg">No artists found.</p>
+            <p className="text-white/20 text-sm mt-2">Check console for API errors.</p>
+          </div>
+        )}
+
         {/* Artist Grid */}
+        {!loading && artists.length > 0 && (
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {artists.map((artist, index) => (
             <div
@@ -142,6 +163,7 @@ const LeaderboardModern = () => {
             </div>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

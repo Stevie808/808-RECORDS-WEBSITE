@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+q#!/usr/bin/env python3
 """
 Comprehensive Backend API Testing for 808Records Admin Dashboard
 Tests all CRUD operations, authentication, and data persistence

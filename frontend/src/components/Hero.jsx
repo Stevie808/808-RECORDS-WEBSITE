@@ -28,7 +28,8 @@ const Hero = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        logPerformance();
+        // Performance monitoring disabled
+        // logPerformance();
         
         const response = await axios.get(`${BACKEND_URL}/api/content/site/hero`);
         if (response.data.content) {

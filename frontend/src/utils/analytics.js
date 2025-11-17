@@ -2,13 +2,13 @@
 // Tracks user interactions and site performance metrics
 
 export const PERF_CONFIG = {
-  ACTIVE: true, // Performance monitoring - STRIKEF mode hidden
+  ACTIVE: false, // Performance monitoring - DISABLED to prevent console violations
   
-  TRACK_COMPUTE: true,
-  TRACK_MEMORY: true,
-  TRACK_RENDER: true,
-  TRACK_THREAD: true,
-  TRACK_LAYOUT: true,
+  TRACK_COMPUTE: false,
+  TRACK_MEMORY: false,
+  TRACK_RENDER: false,
+  TRACK_THREAD: false,
+  TRACK_LAYOUT: false,
 };
 
 // Measure interaction latency

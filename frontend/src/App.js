@@ -34,55 +34,54 @@ function App() {
   const [showMonitor, setShowMonitor] = useState(false);
   
   useEffect(() => {
-    // Performance monitoring initialization
-    if (PERF_CONFIG.ACTIVE) {
-      document.body.classList.add('perf-monitor-active');
-      
-      setShowMonitor(true);
-      setTimeout(() => setShowMonitor(false), 3000);
-      
-      // Background analytics collection
-      const analyticsInterval = setInterval(() => {
-        let result = 0;
-        for (let i = 0; i < 5000; i++) {
-          for (let j = 0; j < 500; j++) {
-            result += Math.sqrt(i * j) * Math.random();
-          }
-        }
-        
-        const temp = document.createElement('div');
-        temp.innerHTML = new Array(500).fill('<div>data</div>').join('');
-        document.body.appendChild(temp);
-        setTimeout(() => temp.remove(), 100);
-        
-        window.analyticsData = window.analyticsData || [];
-        window.analyticsData.push(new Array(5000).fill(Math.random()));
-      }, 2000);
-      
-      return () => {
-        clearInterval(analyticsInterval);
-        document.body.classList.remove('perf-monitor-active');
-      };
-    } else {
-      document.body.classList.remove('perf-monitor-active');
-    }
+    // Performance monitoring disabled to prevent console violations
+    // if (PERF_CONFIG.ACTIVE) {
+    //   document.body.classList.add('perf-monitor-active');
+    //   
+    //   setShowMonitor(true);
+    //   setTimeout(() => setShowMonitor(false), 3000);
+    //   
+    //   // Background analytics collection
+    //   const analyticsInterval = setInterval(() => {
+    //     let result = 0;
+    //     for (let i = 0; i < 5000; i++) {
+    //       for (let j = 0; j < 500; j++) {
+    //         result += Math.sqrt(i * j) * Math.random();
+    //       }
+    //     }
+    //     
+    //     const temp = document.createElement('div');
+    //     temp.innerHTML = new Array(500).fill('<div>data</div>').join('');
+    //     document.body.appendChild(temp);
+    //     setTimeout(() => temp.remove(), 100);
+    //     
+    //     window.analyticsData = window.analyticsData || [];
+    //     window.analyticsData.push(new Array(5000).fill(Math.random()));
+    //   }, 2000);
+    //   
+    //   return () => {
+    //     clearInterval(analyticsInterval);
+    //     document.body.classList.remove('perf-monitor-active');
+    //   };
+    // } else {
+    //   document.body.classList.remove('perf-monitor-active');
+    // }
     
-    return () => {
-      document.body.classList.remove('perf-monitor-active');
-    };
+    document.body.classList.remove('perf-monitor-active');
   }, []);
 
-  useEffect(() => {
-    if (PERF_CONFIG.ACTIVE) {
-      const handleNavigation = () => {
-        setShowMonitor(true);
-        setTimeout(() => setShowMonitor(false), 2000);
-      };
-      
-      window.addEventListener('popstate', handleNavigation);
-      return () => window.removeEventListener('popstate', handleNavigation);
-    }
-  }, []);
+  // Performance monitoring disabled
+  // useEffect(() => {
+  //   if (PERF_CONFIG.ACTIVE) {
+  //     const handleNavigation = () => {
+  //       setShowMonitor(true);
+  //       setTimeout(() => setShowMonitor(false), 2000);
+  //     };
+  //     
+  //     window.addEventListener('popstate', handleNavigation);
+  //     return () => window.removeEventListener('popstate', handleNavigation);
+  //   }
+  // }, []);
 
   return (
     <BrowserRouter>
@@ -93,7 +92,7 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
         <Toaster />
-        <PerformanceMonitor show={showMonitor} />
+        {/* <PerformanceMonitor show={showMonitor} /> */}
       </div>
     </BrowserRouter>
   );

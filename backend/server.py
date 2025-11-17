@@ -22,9 +22,13 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ.get('MONGO_URL')
+if not mongo_url:
+    raise ValueError("MONGO_URL environment variable is required")
+
+db_name = os.environ.get('DB_NAME', '808records')
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[db_name]
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -101,6 +105,19 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup_initialize_admins():
+    try:
+        # Test MongoDB connection first
+        await client.admin.command('ping')
+        logger.info("MongoDB connection successful")
+    except Exception as e:
+        logger.error(f"MongoDB connection failed: {e}")
+        logger.error("Server will start but database operations will fail until MongoDB is accessible")
+        logger.error("Please check:")
+        logger.error("1. MongoDB Atlas -> Network Access -> Add your IP address (or 0.0.0.0/0 for testing)")
+        logger.error("2. Verify connection string in .env file")
+        logger.error("3. Check username and password are correct")
+        return  # Exit early if MongoDB is not accessible
+    
     default_admins = [
         {
             "email": "stevie@808records.com", 

@@ -31,7 +31,9 @@ const Releases = () => {
           setContent({ ...content, ...contentRes.data.content });
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching releases:', error);
+        console.error('Backend URL:', BACKEND_URL);
+        console.error('Full error:', error.response?.data || error.message);
       } finally {
         setLoading(false);
       }
@@ -92,7 +94,24 @@ const Releases = () => {
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-20">
+            <div className="inline-block w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+            <p className="text-white/40 mt-4">Loading releases...</p>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && releases.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-white/40 text-lg">No releases found.</p>
+            <p className="text-white/20 text-sm mt-2">Check console for API errors.</p>
+          </div>
+        )}
+
         {/* Clean uniform grid layout */}
+        {!loading && releases.length > 0 && (
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sortedFilteredReleases.map((release, index) => (
@@ -158,6 +177,7 @@ const Releases = () => {
             ))}
           </div>
         </div>
+        )}
       </div>
     </section>
   );
